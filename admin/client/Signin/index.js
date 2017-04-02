@@ -8,6 +8,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Signin from './Signin';
+import qs from 'qs';
 
 const params = qs.parse(window.location.search.replace(/^\?/, ''));
 const from = typeof params.from === 'string' && params.from.charAt(0) === '/'
@@ -16,8 +17,8 @@ const from = typeof params.from === 'string' && params.from.charAt(0) === '/'
 ReactDOM.render(
 	<Signin
 		brand={Keystone.brand}
-		from={from}
 		logo={Keystone.logo}
+    from={from}
 		user={Keystone.user}
 		userCanAccessKeystone={Keystone.userCanAccessKeystone}
 	/>,
