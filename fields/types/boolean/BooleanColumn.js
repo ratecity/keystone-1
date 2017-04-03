@@ -10,9 +10,10 @@ var BooleanColumn = React.createClass({
 		data: React.PropTypes.object,
 	},
 	renderValue () {
+    let a = this.props
 		return (
 			<ItemsTableValue truncate={false} field={this.props.col.type}>
-				<Checkbox readonly checked={this.props.data.fields[this.props.col.path]} />
+				<Checkbox checked={this.props.data.fields[this.props.col.path]} onChange={(function(e) { console.log('checkboxafewfwef', a); })} />
 			</ItemsTableValue>
 		);
 	},
