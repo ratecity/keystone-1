@@ -74,8 +74,11 @@ const CreateForm = React.createClass({
 		event.preventDefault();
 		const createForm = event.target;
 		const formData = new FormData(createForm);
+    console.log('creating', createForm, formData);
 		this.props.list.createItem(formData, (err, data) => {
+      console.log('creating inside 1');
 			if (data) {
+        console.log('creating inside 2');
 				if (this.props.onCreate) {
 					this.props.onCreate(data);
 				} else {
@@ -90,6 +93,7 @@ const CreateForm = React.createClass({
 					});
 				}
 			} else {
+        console.log('creating inside 3');
 				if (!err) {
 					err = {
 						error: 'connection error',

@@ -92,6 +92,7 @@ const List = function (options) {
  * @param  {Function} callback Called after the API call
  */
 List.prototype.createItem = function (formData, callback) {
+  console.log('list posting formData', formData);
 	xhr({
 		url: `${Keystone.adminPath}/api/${this.path}/create`,
 		responseType: 'json',

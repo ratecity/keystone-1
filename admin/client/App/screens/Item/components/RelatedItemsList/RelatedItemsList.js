@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Alert, BlankState, Center, Spinner } from '../../../../elemental';
+import { Alert, BlankState, Center, Spinner, Container } from '../../../../elemental';
 
 import DragDrop from './RelatedItemsListDragDrop';
 import ListRow from './RelatedItemsListRow';
 
 import { loadRelationshipItemData } from '../../actions';
 import { TABLE_CONTROL_COLUMN_WIDTH } from '../../../../../constants';
+
+import CreateForm from '../../../../shared/CreateForm';
 
 const RelatedItemsList = React.createClass({
 	propTypes: {
@@ -23,6 +25,7 @@ const RelatedItemsList = React.createClass({
 			columns: this.getColumns(),
 			err: null,
 			items: null,
+      createIsOpen: false,
 		};
 	},
 	componentDidMount () {
@@ -116,6 +119,18 @@ const RelatedItemsList = React.createClass({
 
 		return <thead><tr>{cells}</tr></thead>;
 	},
+  renderCreateForm () {
+    return (
+      <Container>
+        <CreateForm
+          list={this.props.refList}
+          isOpen={this.state.createIsOpen}
+          onCancel={() => this.setState({createIsOpen: false})}
+          onCreate={(item) => alert('create!')}
+        />
+      </Container>
+    )
+  },
 	render () {
 		if (this.state.err) {
 			return <div className="Relationship">{this.state.err}</div>;
@@ -130,6 +145,12 @@ const RelatedItemsList = React.createClass({
 
 		return (
 			<div className="Relationship">
+        <div onClick={() => this.setState({createIsOpen: true})}>
+          CLICK HERE TO CREATE
+        </div>
+        <div className="something">
+          {this.renderCreateForm()}
+        </div>
 				<h3 className="Relationship__link"><Link to={listHref}>{this.props.refList.label}</Link></h3>
 				{this.props.items ? this.renderItems() : loadingElement}
 			</div>
